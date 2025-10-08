@@ -1,5 +1,7 @@
 package view;
 
+import dao.CurrenciesDao;
+import entity.Currency;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -12,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class ConverterGUI extends Application{
 
@@ -79,6 +82,15 @@ public class ConverterGUI extends Application{
         addCur.setOnAction(e -> {stage.setScene(scene2); stage.show();});
         exit.setOnAction(e -> {stage.setScene(scene1); stage.show();});
 
+        add.setOnAction(e -> {
+            String newName = name.getText();
+            String abre = abr.getText();
+            double exrate = Double.parseDouble(toUSD.getText());
+            CurrenciesDao cur = new CurrenciesDao();
+            cur.persist(new Currency(newName, abre, exrate));
+            controller.addtoBut1(abre);
+            controller.addtoBut2(abre);
+        });
         convert.setOnAction(e -> {
             double value = Double.parseDouble(enter.getText());
             String curr1 = cur1.getText();

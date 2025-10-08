@@ -4,9 +4,7 @@ import entity.Currency;
 import view.ConverterGUI;
 import entity.Converter;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ConverterController{
     private Converter converter = new Converter();
@@ -83,16 +81,22 @@ public class ConverterController{
 
     private int i = 0;
     private int ii = 0;
-    private final String[] currenciesChoice = {"EUR","USD","VND","GBP","JPY","CNY","CHF","AUD"};
-    private final String[] currenciessChoice = {"EUR","USD","VND","GBP","JPY","CNY","CHF","AUD"};
+    ArrayList<String> currenciesChoice = new ArrayList<>(Arrays.asList("EUR","USD","VND","GBP","JPY","CNY","CHF","AUD"));
+    ArrayList<String> currenciessChoice = new ArrayList<>(Arrays.asList("EUR","USD","VND","GBP","JPY","CNY","CHF","AUD"));
+    public void addtoBut1(String abre){
+        currenciesChoice.add(abre);
+    }
+    public void addtoBut2(String abre){
+        currenciessChoice.add(abre);
+    }
     public String change1(){
-        i = (i + 1) % 8;
-        return currenciesChoice[i];
+        i = (i + 1) % currenciesChoice.size();
+        return currenciesChoice.get(i);
     }
 
     public String change2(){
-        ii = (ii + 1) % 8;
-        return currenciessChoice[ii];
+        ii = (ii + 1) % currenciessChoice.size();
+        return currenciessChoice.get(ii);
     }
 
 }
