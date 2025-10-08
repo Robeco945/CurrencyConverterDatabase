@@ -2,7 +2,6 @@ package entity;
 import jakarta.persistence.*;
 @Entity
 @Table(name="currency")
-
 public class Currency {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,6 +18,7 @@ public class Currency {
     }
 
     public Currency(){}
+
     public String getName() {
         return name;
     }

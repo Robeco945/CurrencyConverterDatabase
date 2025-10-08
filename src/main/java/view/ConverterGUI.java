@@ -20,6 +20,7 @@ public class ConverterGUI extends Application{
 
 
     private ConverterController controller;
+    CurrenciesDao cur = new CurrenciesDao();
     public void start(Stage stage) {
         this.controller = new ConverterController(this);
 
@@ -86,10 +87,10 @@ public class ConverterGUI extends Application{
             String newName = name.getText();
             String abre = abr.getText();
             double exrate = Double.parseDouble(toUSD.getText());
-            CurrenciesDao cur = new CurrenciesDao();
+
             controller.addtoBut1(abre);
             controller.addtoBut2(abre);
-            //cur.persist(new Currency(newName, abre, exrate));
+            cur.persist(new Currency(newName, abre, exrate));
 
         });
         convert.setOnAction(e -> {
