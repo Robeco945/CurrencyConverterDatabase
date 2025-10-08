@@ -87,9 +87,10 @@ public class ConverterGUI extends Application{
             String abre = abr.getText();
             double exrate = Double.parseDouble(toUSD.getText());
             CurrenciesDao cur = new CurrenciesDao();
-            cur.persist(new Currency(newName, abre, exrate));
             controller.addtoBut1(abre);
             controller.addtoBut2(abre);
+            //cur.persist(new Currency(newName, abre, exrate));
+
         });
         convert.setOnAction(e -> {
             double value = Double.parseDouble(enter.getText());
