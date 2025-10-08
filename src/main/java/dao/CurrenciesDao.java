@@ -1,13 +1,46 @@
 package dao;
 
-import entity.Currency;
-import java.sql.*;
-import datasource.MariaDbConnection;
-import java.util.*;
+import entity.*;
+import jakarta.persistence.EntityManager;
+import java.util.List;
 
 public class CurrenciesDao {
 
-    public List<Currency> getAllCurrencies() {
+    public void persist(Currency cur) {
+        EntityManager cu = datasource.MariaDbJpaConnection.getInstance();
+        cu.getTransaction().begin();
+        cu.persist(cur);
+        cu.getTransaction().commit();
+    }
+    public Currency find(int id) {
+        EntityManager cu = datasource.MariaDbJpaConnection.getInstance();
+        Currency cur = cu.find(Currency.class, id);
+        return cur;
+    }
+    public List<Currency> findAll() {
+        EntityManager cu = datasource.MariaDbJpaConnection.getInstance();
+        List<Currency> curr = cu.createQuery("select e from Currency e").getResultList();
+        return curr;
+    }
+    public void update(Currency cur) {
+        EntityManager cu = datasource.MariaDbJpaConnection.getInstance();
+        cu.getTransaction().begin();
+        cu.merge(cur);
+        cu.getTransaction().commit();
+    }
+    public void delete(Currency cur) {
+        EntityManager cu = datasource.MariaDbJpaConnection.getInstance();
+        cu.getTransaction().begin();
+        cu.remove(cur);
+        cu.getTransaction().commit();
+    }
+
+
+
+
+
+
+   /* public List<Currency> getAllCurrencies() {
         Connection conn = MariaDbConnection.getConnection();
         String sql = "SELECT name, abreviation, toUSD FROM currency";
         List<Currency> currencies = new ArrayList<Currency>();

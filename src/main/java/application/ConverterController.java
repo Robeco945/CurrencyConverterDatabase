@@ -18,7 +18,7 @@ public class ConverterController{
         this.gui = gui;
 
         currencies = new HashMap<>();
-        List<Currency> currencyList = dao.getAllCurrencies();
+        List<Currency> currencyList = dao.findAll();
 
         for(Currency cur :  currencyList){
             currencies.put(cur.getAbreviation(),cur);

@@ -1,8 +1,15 @@
 package entity;
+import jakarta.persistence.*;
+@Entity
+@Table(name="currency")
 
 public class Currency {
-
-    private String name, abreviation;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="name")
+    private String name;
+    @Column(name = "abreviation")
+    private String abreviation;
     private double toUSD;
 
     public Currency(String name, String abreviation, double toUSD) {
@@ -11,6 +18,7 @@ public class Currency {
         this.toUSD = toUSD;
     }
 
+    public Currency(){}
     public String getName() {
         return name;
     }
