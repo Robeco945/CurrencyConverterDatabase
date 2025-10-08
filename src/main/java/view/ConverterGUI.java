@@ -20,6 +20,21 @@ public class ConverterGUI extends Application{
     public void start(Stage stage) {
         this.controller = new ConverterController(this);
 
+        GridPane adder = new GridPane();
+        HBox all = new HBox();
+        TextField name = new TextField("currency name");
+        TextField abr = new TextField("abbreviation");
+        TextField toUSD = new TextField("rate to USD");
+        Button add = new Button("add");
+        Button exit = new Button("exit");
+
+        all.getChildren().add(name);
+        all.getChildren().add(abr);
+        all.getChildren().add(toUSD);
+        all.getChildren().add(add);
+        all.getChildren().add(exit);
+        adder.add(all,0,0);
+
         GridPane layout = new GridPane();
         HBox inner = new HBox();
         BorderPane title1 = new BorderPane();
@@ -35,6 +50,7 @@ public class ConverterGUI extends Application{
         Button convert = new Button("Convert");
         TextField result = new TextField("Results");
         TextField enter = new TextField("5");
+        Button addCur = new Button("Add new currency");
 
         title1.setLeft(new Label("Source currency"));
 
@@ -49,14 +65,19 @@ public class ConverterGUI extends Application{
         inner.getChildren().add(cur2);
         layout.add(inner,0,1);
         layout.add(title1,0,2);
+        layout.add(addCur,0,3);
 
 
-        Scene scene = new Scene(layout);
+        Scene scene1 = new Scene(layout);
+        Scene scene2 = new Scene(adder);
 
-        scene.getStylesheets().add("style.css");
+        scene1.getStylesheets().add("style.css");
+        scene2.getStylesheets().add("style.css");
 
         cur1.setOnAction(e -> cur1.setText(controller.change1()));
         cur2.setOnAction(e -> cur2.setText(controller.change2()));
+        addCur.setOnAction(e -> {stage.setScene(scene2); stage.show();});
+        exit.setOnAction(e -> {stage.setScene(scene1); stage.show();});
 
         convert.setOnAction(e -> {
             double value = Double.parseDouble(enter.getText());
@@ -66,7 +87,7 @@ public class ConverterGUI extends Application{
             DecimalFormat df = new DecimalFormat("#.######");
             result.setText(df.format(resultValue));
         });
-        stage.setScene(scene);
+        stage.setScene(scene1);
         stage.show();
 
 
