@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 public class Currency {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int id;
     @Column(name="name")
     private String name;
     @Column(name = "abreviation")
@@ -43,4 +44,8 @@ public class Currency {
     public void setToUSD(double toUSD) {
         this.toUSD = toUSD;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 }

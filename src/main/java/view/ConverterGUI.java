@@ -98,7 +98,7 @@ public class ConverterGUI extends Application{
             String curr1 = cur1.getText();
             String curr2 = cur2.getText();
             double resultValue = controller.convert(value, curr1, curr2);
-            DecimalFormat df = new DecimalFormat("#.######");
+            DecimalFormat df = new DecimalFormat("#.###");
             result.setText(df.format(resultValue));
         });
         stage.setScene(scene1);
