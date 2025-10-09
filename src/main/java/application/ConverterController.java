@@ -1,6 +1,8 @@
 package application;
 import dao.CurrenciesDao;
+import dao.TransactionDao;
 import entity.Currency;
+import entity.Transaction;
 import view.ConverterGUI;
 import entity.Converter;
 
@@ -67,13 +69,23 @@ public class ConverterController{
     public double convert(double in, String currencyIn, String currencyOut){
         Currency from = currencies.get(currencyIn);
         Currency to = currencies.get(currencyOut);
+
+        if(from == null || to == null) {
+            throw new IllegalArgumentException("Currency not found!");
+        }
+
         double exchangeRate = from.getToUSD() / to.getToUSD();
         converter.setExchangeRate(exchangeRate);
         converter.setIn(in);
-        converter.setOut(out);
-        return converter.convert();
+        double result = converter.convert();
 
+        // Save transaction
+        TransactionDao txDao = new TransactionDao();
+        txDao.persist(new Transaction(in, from, to));
+
+        return result;
     }
+
 
 
 
